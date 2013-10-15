@@ -1,0 +1,1 @@
+Sample maven project for testing integrations among TestNG and tap4j
