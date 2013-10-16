@@ -22,6 +22,10 @@
 				            	<name>usedefaultlisteners</name>
 				            	<value>false</value>
 				            </property>
+				            <property>
+		                        <name>listener</name>
+		                        <value>org.tap4j.ext.testng.listener.TapListenerClassYaml</value>
+		                    </property>
 			            </properties>
 						<suiteXmlFiles>
 							<suiteXmlFile>${project.basedir}/testng.xml</suiteXmlFile>

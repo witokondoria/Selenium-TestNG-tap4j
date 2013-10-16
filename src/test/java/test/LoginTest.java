@@ -16,9 +16,9 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Listeners(value={
-		org.tap4j.ext.testng.listener.TapListenerClassYaml.class
-})
+//@Listeners(value={
+//		org.tap4j.ext.testng.listener.TapListenerClassYaml.class
+//})
 public class LoginTest {
 
 	String browser;
@@ -36,6 +36,7 @@ public class LoginTest {
 	public void setUp() {
 		
 		driver = new HtmlUnitDriver();
+		//((HtmlUnitDriver) driver).setProxy("proxy", 3128);
 		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);		
 	}
 	
