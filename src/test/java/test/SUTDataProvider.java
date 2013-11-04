@@ -11,7 +11,7 @@ import org.testng.annotations.DataProvider;
 
 import com.google.common.collect.Lists;
 
-public class TestDataProvider {
+public class SUTDataProvider {
 
 	@DataProvider
 	public static Iterator<Object[]> textDataProvider(ITestContext context, Constructor<?> testConstructor) throws Exception {
@@ -23,7 +23,9 @@ public class TestDataProvider {
 		br = new BufferedReader(new FileReader("src/test/resources/SUTs.dat"));
 
 		while ((SUT = br.readLine()) != null) {
-			lSUT.add(new Object[] { SUT });
+			if (!SUT.startsWith("#")) {
+				lSUT.add(new Object[] { SUT });
+			}
 		}
 		br.close();
 		br = null;

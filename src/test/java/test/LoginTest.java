@@ -3,6 +3,8 @@ package test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
@@ -13,12 +15,8 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Factory;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-//@Listeners(value={
-//		org.tap4j.ext.testng.listener.TapListenerClassYaml.class
-//})
 public class LoginTest {
 
 	String browser;
@@ -27,7 +25,7 @@ public class LoginTest {
 	
 	public Logger Log = Logger.getLogger(this.getClass());
 	
-    @Factory(dataProviderClass = TestDataProvider.class, dataProvider = "textDataProvider")
+    @Factory(dataProviderClass = SUTDataProvider.class, dataProvider = "textDataProvider")
     public LoginTest(String SUT) {
     	this.SUT = SUT;
     }
@@ -36,7 +34,7 @@ public class LoginTest {
 	public void setUp() {
 		
 		driver = new HtmlUnitDriver();
-		//((HtmlUnitDriver) driver).setProxy("proxy", 3128);
+		((HtmlUnitDriver) driver).setProxy("proxy.es.ad.bull.net", 3128);
 		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);		
 	}
 	
@@ -54,7 +52,13 @@ public class LoginTest {
 	
 	@AfterMethod(alwaysRun = true)
 	public void tearDownBrowserResources(ITestResult result) {
-		result.setAttribute("SUT", this.SUT);
+		
+
+		Map<String, Object> platform = new HashMap<String, Object>();
+		platform.put("Platform", this.SUT);
+		
+		result.setAttribute("Testlink", platform);
+		
 		driver.quit();		
 	}
 }
